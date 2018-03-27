@@ -32,18 +32,17 @@ type CharSet = String
 -- the second argument being `Just ""`, we will not be testing this edge case.
 tr :: CharSet -> Maybe CharSet -> String -> String
 tr _inset Nothing xs = deleteChars _inset xs
-tr _inset (Just _outset) xs = translateChars _inset _outset xs
+tr _inset (Just _outset) xs = translateChars (fst tup) (snd tup) xs
+  where tup = standardizeTranslation _inset _outset
 --  | otherwise          = translateChars (fst tup) (snd tup) xs
 --                            where tup = standardizeTranslation _inset (fromJust _outset)
-{--
+
 standardizeTranslation :: CharSet -> CharSet -> (CharSet, CharSet)
 standardizeTranslation _inset _outset
-  | length _inset  < length _outset = (_inset, _outset')
-                                          where _outset' = take (length _inset) _outset
-  | length _inset > length _outset = (_inset, _outset')
-                                          where _outset' = _outset ++ take (length _inset - length _outset) (repeat $ last _outset)
-  | otherwise                      = (_inset, _outset)
---}
+  | length _inset  < length _outset = (_inset, take (length _inset) _outset)
+  | length _inset > length _outset = (_inset, _outset ++ take (length _inset - length _outset) (repeat $ last _outset))
+  | otherwise = (_inset, _outset)
+
 deleteChars :: CharSet -> String -> String
 deleteChars _inset (x:xs)
   | x `elem` _inset = deleteChars _inset xs

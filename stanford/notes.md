@@ -166,3 +166,70 @@ Automatically, you can now access `val1` with the following expression: `field1 
 
 ## Miscellaneous
 1. A `!` before a data field type makes it strict, meaning it can't be a thunk.
+
+
+# Exceptions
+
+## Exceptions in Pure Code
+```error :: String -> a```
+
+`Control.Exception` throws language-level exceptions.
+```
+class Exception e where
+    throw :: Exception e => e -> a
+    throwIO :: Exception e => e -> IO a
+    catch :: Exception e => IO a -> (e -> IO a) -> IO a
+```
+
+1. Can only `catch` exceptions in IO, but can `throw` exceptions in pure code. 
+2. try returns Right a normally, Left e if an exception occurred
+```
+try :: Exception e => IO a -> IO (Either e a)
+```
+3. `finally` and `onException`
+```
+finally :: IO a -> IO b -> IO a      -- cleanup always
+onException :: IO a -> IO b -> IO a  -- after exception
+```
+
+## Exceptions and laziness
+1. Exceptions only occur when thunks are evaluated. For example, `let x = 1/0 : 1/0` will not return an error until an element in the list is evaluated.
+2. Even `seq x 5 where x = (div 1 0 : div 1 0` will not throw an error. 
+3. If you want to evaluate all thunks in a nested data type, use `deepseq` in `Control.DeepSeq`
+
+# Haskell Threads
+1. User level threads implemented in `Control.Concurrent`
+      - Lightweight (both time and space)
+      - Use threads where in other languages you'd use something cheaper
+      - Runtime emulates blocking OS calls 
+2. `forkIO` creates a new thread
+`forkIO :: IO () -> IO ThreadId`
+
+## MVar
+1. Allows for communication between threads via shared variables
+2. `Mvar t` is a mutable variable of type t that is either full or empty
+```
+newEmptyMVar :: IO (MVar a)  -- create empty MVar
+newMVar :: a -> IO (MVar a)  -- create full MVar given val
+
+takeMVar :: MVar a -> IO a
+putMVar :: MVar a -> a -> IO ()
+tryTakeMVar :: MVar a -> IO (Maybe a) -- Nothing if empty
+tryPutMVar :: MVar a -> a -> IO Bool  -- False if full
+```
+3. `takeMVar` and `putMVar` will put threads to sleep if `MVar` is empty or full, respectively.
+
+## Benchmarking Library: `Criterion`
+
+## OS Threads
+1. By default, all Haskell threads run in a single OS thread
+2. Link a module with `-threaded` to allow OS threads as well (uses `pthread_create`
+3. `forkOS` creates a Haskell thread bound to a new OS thread
+`forkOS :: IO () -> IO ThreadId`
+4. Haskell threads bound to OS threads are much slower than Haskell threads in the same OS thread
+5. Without `-threaded`, thread switches is just a procedure call
+6. With `-threaded`, bound Haskell threads are in a particular OS thread whereas unbound Haskell thread share and can migrate between OS threads. 
+7. Unbound threads have similar performance to threads without `-threaded`
+
+### So why use OS threads if they are slower?
+1. If an unbound thread blocks, it can block a whole program
