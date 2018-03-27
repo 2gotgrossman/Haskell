@@ -15,8 +15,7 @@
 ##  1. Pure Functions
 1.  No Side Effects
 2. Functions having inputs and outputs. That's it
-3. Two different functions are equivalent
-    - If given the same inputs, they will both produce the same output
+3. Two different functions are equivalent _if and only if_ given the same inputs, they will both produce the same output
 ```python
 # Not Pure:
 def sum_of_list1(values: List[int]) -> int:
@@ -38,20 +37,19 @@ def sum_of_list2(values: List[int]) -> int:
 >>> numbers = list(range(20))
 >>> numbers
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
->>> def square_me(x):
+>>> def square_me(x: Int) -> Int:
 >>>     return x*x
 >>> squared_numbers = list(map(square_me, numbers))
 >>> squared_numbers
 [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
 ```
-2.  `map` is a higher order function
-3. If there's a repeated pattern we employ, we can abstract away the details into a higher order function or data structure
+2. If there's a repeated pattern we employ, we can abstract away the details into a higher order function or data structure
 
 ## 3. Recursion Mania
 1. Get really excited about recursion!!
 2. Lists in FP languages are Linked Lists
     - Operations on Linked Lists can be written recursively
-3. Issues with stack pressure are relieved with tail recursion
+3. Issues with stack pressure are relieved with [tail recursion](https://stackoverflow.com/questions/33923/what-is-tail-recursion)
     - We don't care about the intermediate state of many recursive functions. 
     - We can drop the context of these intermediate functions from the call stack.
 ```python
@@ -72,7 +70,6 @@ def fact_tail(n):
 
     fact_helper(n, 1)
 ```
-![factorial without tail recursion](http://www.includehelp.com/ds/Images/factorial.jpg)
 
 ## 4. Lazy Evaluation
 1. Haskell delays the evaluation of an expression until its value is needed
