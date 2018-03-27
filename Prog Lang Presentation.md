@@ -8,7 +8,8 @@
 3. FP is flowing into other languages and paradigms
     - Python, Java 8, Javascript, MapReduce, Scala, Kotlin, Lisp, etc.
 4. Companies are using FP languages!
-    - [Facebook](https://code.facebook.com/posts/745068642270222/fighting-spam-with-haskell/), [Tesla](https://www.reddit.com/r/haskell/comments/84r1dp/summer_2018_internship_opportunity_with_tesla_inc/), Apple, and many hedge funds / Wall Street firms.
+    - [Facebook](https://code.facebook.com/posts/745068642270222/fighting-spam-with-haskell/), [Tesla](https://www.reddit.com/r/haskell/comments/84r1dp/summer_2018_internship_opportunity_with_tesla_inc/),  and many hedge funds / Wall Street firms use Haskell.
+    - Many more use FP
 
 # Characteristics of Functional Programming
 ##  1. Pure Functions
@@ -114,7 +115,7 @@ x = x + 5
 ## Simple Values and Functions
 
 ```hs
--- The value `five` represents the fifth integer
+-- I'm a comment!
 five = 5
 
 -- A function that takes `n` as an input
@@ -130,32 +131,15 @@ incAndAdd x y = increment x + increment y
 
 ---
 
-## Definitions - Operators
+## Operators
 
-- You can also define operators
+- You can also define operators 
+    - Think: mathematical operators (addition, subtraction, etc) 
 
 ```hs
 x +- y = (x + x) - (y + y)
 six  = (+-) 5 2
 six' = 5 +- 2
-```
-
----
-
-## Function Calls - Partial Application
-
-- We can supply only some of the arguments to a function
-
-```hs
--- takes 3 arguments, so in this case N = 3
-sum3 x y z = x + y + z
-
--- only supplies 2 arguments (K = 2), 0 and 1.
--- so newIncrement is a function that takes (N - K = 1) arguments
-newIncrement = sum3 0 1
-
--- three is the value 3
-three = newIncrement 2
 ```
 
 ---
@@ -191,7 +175,8 @@ type Nickname = String
 
 ## Type Signatures
 
-We can give values a type signature using `::`
+- We can give values a type signature using `::`
+- Without a type signature, the type would default to `String`
 
 ```hs
 myNickname :: Nickname
@@ -200,14 +185,12 @@ myNickname = "suppi"
 
 ---
 
-## Defining Types - Sum Types
+## Defining Complex Types 
 
 - We can define our own types using the keyword `data`
-- Sum types are alternative possible values of a given type
-- Similar to enums in other languages
 - We use `|` to say "alternatively"
 - Each option must start with an uppercase letter
-- We can also use `data` to define compound data of existing types
+- We can also combine other data types to make more complex data types
 - Similar to structs in other languages
 
 ```hs
@@ -237,7 +220,7 @@ data RGB
 magenta :: RGB
 magenta = MkRGB 255 0 255
 
--- Or we can combine them!
+-- Or we can combine them
 data Color
   = Red
   | Blue
@@ -267,25 +250,6 @@ sum3 x y z = x + y + z
 supplyGreenAndBlue :: Int -> Int -> Color
 supplyGreenAndBlue = RGB 100
 ```
-
----
-
-## The Type of Functions
-
-- `->` is right associative, The function definitions from the previous slide will be parsed like this:
-
-```hs
-increment :: Int -> Int
-increment n = n + 1
-
-sum3 :: (Int -> (Int -> (Int -> Int)))
-sum3 x y z = x + y + z
-
-supplyGreenAndBlue :: (Int -> (Int -> Color))
-supplyGreenAndBlue = RGB 100
-```
-
-- This is why partial function application works.
 
 ---
 
@@ -332,18 +296,6 @@ f . g = compose f g
 
 ---
 
-## One More Thing About Functions
-
-- Remember, `->` in type signatures is right associative
-- Doesn't it look like we take two functions and return a third from the type signature?
-
-```hs
-compose :: ((b -> c) -> ((a -> b) -> (a -> c)))
-compose f g x = f (g x)
-```
-
----
-
 ## Recursive Types and Data Structures
 
 - A recursive data type is a data definition that refers to itself
@@ -366,44 +318,15 @@ list123 = ValAndNext 1 (ValAndNext 2 (ValAndNext 3 EndOfList))
 - Matches from top to bottom
 
 ```hs
-myIf :: Bool -> a -> a -> a
-myIf test trueBranch falseBranch =
-  case test of
-    True  -> trueBranch
-    False -> falseBranch
-```
-
----
-
-## Case Expression (Pattern Matching)
-
-- Matches from top to bottom
-
-```hs
 factorial :: Int -> Int
-factorial num =
-  case num of
-    0 -> 1
-    n -> n * factorial (n - 1)
-```
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
 
----
+-- The underscore means that we aren't using that variable in the following expression
+myIf :: Bool -> a -> a -> a
+myIf True  trueBranch _           = trueBranch
+myIf False _          falseBranch = falseBranch
 
-## Case Expression (Pattern Matching)
-
-- Matches from top to bottom
-- The pattern `_` means match anything
-
-```hs
-colorName :: Color -> String
-colorName color =
-  case color of
-    Red -> "red"
-    Green -> "green"
-    Blue -> "blue"
-    RGB 255 0 255 -> "magenta"
-    RGB _ 255 _ -> "well it has a lot of green in it"
-    _ -> "i don't know this color"
 ```
 
 ---
@@ -425,11 +348,10 @@ data List a
     3. Head and tail
     4. Product of list of ints
     5. Sum of list of ints
-    6. Map
-    7. Concat two lists
-    8. Reverse
+    6. New product and sum
+    7. Map
+    8. Concat two lists
     9. Filter
-    10. Fold Left, Fold Right
 
 - Some necessary helper code
 ```hs
