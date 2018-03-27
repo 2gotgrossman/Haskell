@@ -1,3 +1,15 @@
+# Functional Programming (FP)
+## Why Do I Care?
+1. A new perspective on programming
+    - Viewing problems from another perspective can lead to new solutions
+2. In some ways, it's a safer and more resilient way to program
+    - Possibly fewer bugs
+    - Effects on other parts of code base are more explicit
+3. FP is flowing into other languages and paradigms
+    - Python, Java 8, Javascript, MapReduce, Scala, Kotlin, Lisp, etc.
+4. Companies are using FP languages!
+    - [Facebook](https://code.facebook.com/posts/745068642270222/fighting-spam-with-haskell/), [Tesla](https://www.reddit.com/r/haskell/comments/84r1dp/summer_2018_internship_opportunity_with_tesla_inc/), Apple, and many hedge funds / Wall Street firms.
+
 # Characteristics of Functional Programming
 ##  1. Pure Functions
 1.  No Side Effects
@@ -13,11 +25,11 @@ def sum_of_list1(values: List[int]) -> int:
 # Pure
 def sum_of_list2(values: List[int]) -> int:
     total = sum(values)
-    values.append(total)
+    values.append(total)    # I'm not Pure!
     return total
 ```
 
-## 2. Higher Order Functions!
+## 2. Higher Order Functions and Abstraction
 1. A function that
     1. Takes one or more functions as arguments
     2. or returns a function as a result
@@ -31,12 +43,12 @@ def sum_of_list2(values: List[int]) -> int:
 >>> squared_numbers
 [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
 ```
-2.  `map` is a function that takes a function as an input
-    - `map` is a higher order function
+2.  `map` is a higher order function
+3. If there's a repeated pattern we employ, we can abstract away the details into a higher order function or data structure
 
-## 3. Recursion Mania!!!
+## 3. Recursion Mania
 1. Get really excited about recursion!!
-2. Lists in Functional Programming Languages are Linked Lists
+2. Lists in FP languages are Linked Lists
     - Operations on Linked Lists can be written recursively
 3. Issues with stack pressure are relieved with tail recursion
     - We don't care about the intermediate state of many recursive functions. 
@@ -68,7 +80,7 @@ def fact_tail(n):
     - `denom != 0 && num / denom`
 3. We also gain the ability to deal with infinite lists
     - We only evaluate the part of the list that we will use
-4. The following breaks in Python but the equivalent would work in Haskell!
+4. The following breaks in Python but the equivalent would work in Haskell
 
 ```python
 print length([2+1, 3*2, 1/0, 5-4])
@@ -79,7 +91,7 @@ x = 1/0
 1. There are no variables, only values
 2. You can't change the value of a list. 
 3. Leads to new ways to deal with data structures
-4. Problems with deep and shallow copies disappear!
+4. Problems with deep and shallow copies disappear
 
 ```python
 # NOPE
@@ -93,29 +105,20 @@ x = x + 5
     - More accurately: Your types need to make sense
 2. The compiler will make sure there are no type conflicts before runtime
 
-# Haskell!!
+# Haskell
 ## Content Shamelessly Borrowed from `Reading Simple Haskell`
 - Original content available [here](https://soupi.github.io/rfc/reading_simple_haskell/).
 
 ---
 
-## Definitions - Simple Values
-
-- Left-hand side is the name of the value
-- `=` is used to declare the expression that is bound to the name on the left side (value definition)
+## Simple Values and Functions
 
 ```hs
+-- The value `five` represents the fifth integer
 five = 5
-```
 
----
-
-## Definitions - Functions
-
-- Add argument names after a name
-- Call functions without parentheses
-
-```hs
+-- A function that takes `n` as an input
+-- We can infer the type of `n`
 increment n = n + 1
 
 six = increment five
