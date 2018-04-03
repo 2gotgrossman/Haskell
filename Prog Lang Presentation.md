@@ -321,13 +321,13 @@ f . g = compose f g
 - This lets us define even more interesting data structures such as linked lists and trees
 
 ```hs
-data IntList
-  = EndOfIntList
-  | ValAndNext Int IntList
+data TreeInts
+  = Leaf
+  | Node Int TreeInts TreeInts
 
 -- the list [1,2,3]
-list123 :: IntList
-list123 = ValAndNext 1 (ValAndNext 2 (ValAndNext 3 EndOfList))
+tree123 :: TreeInts
+list123 = Node 5 (Node 1 Leaf Leaf) (Node 10 Leaf Leaf)
 ```
 
 ---
