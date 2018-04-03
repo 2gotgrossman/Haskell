@@ -6,7 +6,7 @@ You can find these notes at https://tinyurl.com/prog-lang-haskell.
 ## Nielsen Talk on Machine Learning and Software in Industry Today
 ![](https://raw.githubusercontent.com/2gotgrossman/ieee-program/master/IntroPython/Nielsen%20Tech%20Talk.jpg)
 
-## Why Do I Care?
+## Why Do I Care about FP?
 1. A new perspective on programming
     - Viewing problems from another perspective can lead to new solutions
 2. In some ways, it's a safer and more resilient way to program
