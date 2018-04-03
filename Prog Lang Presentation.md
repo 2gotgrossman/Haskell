@@ -1,4 +1,11 @@
+
+
 # Functional Programming (FP)
+You can find these notes at https://tinyurl.com/prog-lang-haskell.
+
+## Nielsen Talk on Machine Learning and Software in Industry Today
+![](https://raw.githubusercontent.com/2gotgrossman/ieee-program/master/IntroPython/Nielsen%20Tech%20Talk.jpg)
+
 ## Why Do I Care?
 1. A new perspective on programming
     - Viewing problems from another perspective can lead to new solutions
@@ -11,7 +18,13 @@
     - [Facebook](https://code.facebook.com/posts/745068642270222/fighting-spam-with-haskell/), [Tesla](https://www.reddit.com/r/haskell/comments/84r1dp/summer_2018_internship_opportunity_with_tesla_inc/),  and many hedge funds / Wall Street firms use Haskell.
     - Many more use FP
 
-# Characteristics of Functional Programming
+## Goal For Today (time permitting)
+1. What is FP? (9:35am)
+2. Haskell 101 (9:55am)
+3. Functional Lists (10:20am)
+
+
+# Characteristics of Functional Programming (9:35am)
 ##  1. Pure Functions
 1.  No Side Effects
 2. Functions having inputs and outputs. That's it
@@ -79,6 +92,7 @@ def fact_tail(n):
 3. We also gain the ability to deal with infinite lists
     - We only evaluate the part of the list that we will use
 4. The following breaks in Python but the equivalent would work in Haskell
+    - But Python 3 Generators are lazy! (Think `map`, `filter`, `range`)
 
 ```python
 print length([2+1, 3*2, 1/0, 5-4])
@@ -87,7 +101,7 @@ x = 1/0
 
 ## 5. Immutability
 1. There are no variables, only values
-2. You can't change the value of a list. 
+2. You can't change the value of a list.
 3. Leads to new ways to deal with data structures
 4. Problems with deep and shallow copies disappear
 
@@ -106,10 +120,12 @@ x = x + 5
 # Haskell
 ## Content Shamelessly Borrowed from `Reading Simple Haskell`
 - Original content available [here](https://soupi.github.io/rfc/reading_simple_haskell/).
+## Try it yourself!
+- Try this Haskell REPL here: [Haskell REPL](https://repl.it/site/languages/haskell)
 
 ---
 
-## Simple Values and Functions
+## Simple Values and Functions (9:55am)
 
 ```hs
 -- I'm a comment!
@@ -155,6 +171,13 @@ sumOf3 x y z =
 -- or:
 sumOf3 x y z = temp + z
   where temp = x + y
+
+-- `let` and `where` statements attempt to make code more readable
+fib n = if n > 1
+           then n' + n''
+           else 1
+  where n'  = fib (n-1)
+        n'' = fib (n-2)
 ```
 
 ---
@@ -270,8 +293,6 @@ seven = identity 7
 true :: Bool
 true = identity True
 
-const :: a -> b -> a
-const x y = x
 ```
 
 ---
@@ -328,11 +349,11 @@ myIf False _          falseBranch = falseBranch
 
 ---
 
-## Example
 
-- [Try it in repl.it](https://repl.it/repls/IntrepidVacantGraywolf) to see the result
 
-# Let's Create Lists!
+# Functional Lists! (10:25am)
+- [Lists: Live Coding](https://repl.it/@2gotgrossman/Prog-Lang-Haskell)
+- [Lists: Solutions to Problems](https://repl.it/@2gotgrossman/Prog-Lang-Haskell-Answers)
 ```hs
 data List a
   = Nil
@@ -341,24 +362,8 @@ data List a
 ```
 - Let's build up from here!
     1. Length of List
-    2. Infinite lists
-    3. Head and tail
-    4. Product of list of ints
-    5. Sum of list of ints
-    6. New product and sum
-    7. Map
-    8. Concat two lists
-    9. Filter
-
-- Some necessary helper code
-```hs
-infixr 5 :. 
-
-instance Show t => Show (List t) where
-  show = show . foldRight (:) []
-
--- functions over List that you may consider using
-foldRight :: (a -> b -> b) -> b -> List a -> b
-foldRight _ b Nil      = b
-foldRight f b (h :. t) = f h (foldRight f b t)
-```
+    2. Head and tail
+    3. Infinite lists
+    4. Product and Sum of list of ints
+    5. Higher order functions
+    6. Concatenating two lists
