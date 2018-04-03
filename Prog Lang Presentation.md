@@ -368,3 +368,7 @@ data List a
     4. Product and Sum of list of ints
     5. Higher order functions
     6. Concatenating two lists
+
+
+# Takes on Today's Spotify IPO
+- [Jack Stratton (of Vulfpeck) on Spotify IPO](https://www.youtube.com/watch?v=LB1sTH7bUQ4)
