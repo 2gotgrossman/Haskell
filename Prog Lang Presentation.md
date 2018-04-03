@@ -24,7 +24,7 @@ You can find these notes at https://tinyurl.com/prog-lang-haskell.
 3. Functional Lists (10:20am)
 
 
-# Characteristics of Functional Programming (9:35am)
+# Characteristics of Functional Programming (9:35-9:55am)
 ##  1. Pure Functions
 1.  No Side Effects
 2. Functions having inputs and outputs. That's it
@@ -117,7 +117,8 @@ x = x + 5
     - More accurately: Your types need to make sense
 2. The compiler will make sure there are no type conflicts before runtime
 
-# Haskell
+# Haskell (9:55-10:20am)
+
 ## Content Shamelessly Borrowed from `Reading Simple Haskell`
 - Original content available [here](https://soupi.github.io/rfc/reading_simple_haskell/).
 ## Try it yourself!
@@ -125,7 +126,7 @@ x = x + 5
 
 ---
 
-## Simple Values and Functions (9:55am)
+## Simple Values and Functions
 
 ```hs
 -- I'm a comment!
@@ -351,7 +352,7 @@ myIf False _          falseBranch = falseBranch
 
 
 
-# Functional Lists! (10:25am)
+# Functional Lists! (10:20-10:45am)
 - [Lists: Live Coding](https://repl.it/@2gotgrossman/Prog-Lang-Haskell)
 - [Lists: Solutions to Problems](https://repl.it/@2gotgrossman/Prog-Lang-Haskell-Answers)
 ```hs
