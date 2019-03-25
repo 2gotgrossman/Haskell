@@ -3,9 +3,6 @@
 # Functional Programming (FP)
 You can find these notes at https://tinyurl.com/prog-lang-haskell.
 
-## Nielsen Talk on Machine Learning and Software in Industry Today
-![](https://raw.githubusercontent.com/2gotgrossman/ieee-program/master/IntroPython/Nielsen%20Tech%20Talk.jpg)
-
 ## Why Do I Care about FP?
 1. A new perspective on programming
     - Viewing problems from another perspective can lead to new solutions
@@ -19,12 +16,12 @@ You can find these notes at https://tinyurl.com/prog-lang-haskell.
     - Many more use FP
 
 ## Goal For Today (time permitting)
-1. What is FP? (9:35am)
-2. Haskell 101 (9:55am)
-3. Functional Lists (10:20am)
+1. What is FP? (3:35pm)
+2. Haskell 101 (3:55pm)
+3. Functional Lists (4:20pm)
 
 
-# Characteristics of Functional Programming (9:35-9:55am)
+# Characteristics of Functional Programming (3:35-3:55pm)
 ##  1. Pure Functions
 1.  No Side Effects
 2. Functions having inputs and outputs. That's it
@@ -63,7 +60,7 @@ def sum_of_list2(values: List[int]) -> int:
 2. Lists in FP languages are Linked Lists
     - Operations on Linked Lists can be written recursively
 3. Issues with stack pressure are relieved with [tail recursion](https://stackoverflow.com/questions/33923/what-is-tail-recursion)
-    - We don't care about the intermediate state of many recursive functions. 
+    - We don't care about the intermediate state of many recursive functions.
     - We can drop the context of these intermediate functions from the call stack.
 ```python
 # Not Tail Recursive
@@ -113,11 +110,11 @@ x = x + 5
 
 ## 6. Strongly Typed
 1. You need to declare the types of your variables up front
-    - Not necessarily true in Haskell because the Haskell compiler is smart. 
+    - Not necessarily true in Haskell because the Haskell compiler is smart.
     - More accurately: Your types need to make sense
 2. The compiler will make sure there are no type conflicts before runtime
 
-# Haskell (9:55-10:20am)
+# Haskell (3:55-4:20pm)
 
 ## Content Shamelessly Borrowed from `Reading Simple Haskell`
 - Original content available [here](https://soupi.github.io/rfc/reading_simple_haskell/).
@@ -147,8 +144,8 @@ incAndAdd x y = increment x + increment y
 
 ## Operators
 
-- You can also define operators 
-    - Think: mathematical operators (addition, subtraction, etc) 
+- You can also define operators
+    - Think: mathematical operators (addition, subtraction, etc)
 
 ```hs
 x +- y = (x + x) - (y + y)
@@ -206,7 +203,7 @@ myNickname = "suppi"
 
 ---
 
-## Defining Complex Types 
+## Defining Complex Types
 
 - We can define our own types using the keyword `data`
 - We use `|` to say "alternatively"
@@ -352,7 +349,7 @@ myIf False _          falseBranch = falseBranch
 
 
 
-# Functional Lists! (10:20-10:45am)
+# Functional Lists! (4:20-4:45pm)
 - [Lists: Live Coding](https://repl.it/@2gotgrossman/Prog-Lang-Haskell)
 - [Lists: Solutions to Problems](https://repl.it/@2gotgrossman/Prog-Lang-Haskell-Answers)
 ```hs
