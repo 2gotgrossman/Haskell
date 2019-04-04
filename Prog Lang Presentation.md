@@ -92,8 +92,8 @@ def fact_tail(n):
     - But Python 3 Generators are lazy! (Think `map`, `filter`, `range`)
 
 ```python
-print length([2+1, 3*2, 1/0, 5-4])
-x = 1/0
+>>> print(len([2+1, 3*2, 1/0, 5-4]))
+ZeroDivisionError: division by zero
 ```
 
 ## 5. Immutability
